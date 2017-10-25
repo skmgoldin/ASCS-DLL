@@ -1,3 +1,7 @@
+# ASCS-DLL
+
+[ ![Codeship Status for skmgoldin/ASCS-DLL](https://app.codeship.com/projects/02e4f330-9c03-0135-d99c-3e0263b62404/status?branch=master)](https://app.codeship.com/projects/252853)
+
 mapping(bytes32 => uint) store;
 bytes32[] attributes
 uint attrSortIndex
