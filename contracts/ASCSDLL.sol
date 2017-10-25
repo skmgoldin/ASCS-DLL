@@ -8,28 +8,28 @@ library ASCSDLL {
         uint sortAttrIdx;
     }
 
-    function setOptions(Data storage self, bytes32[] _attrNames, uint _sortAttrIdx) {
+    function setOptions(Data storage self, bytes32[] _attrNames, uint _sortAttrIdx) public {
         self.attrNames = _attrNames;
         self.sortAttrIdx = _sortAttrIdx;
     }
 
-    function getAttr(Data storage self, uint curr, bytes32 attrName) returns (uint) {
-        return self.store[sha3(msg.sender, curr, attrName)];
+    function getAttr(Data storage self, uint curr, bytes32 attrName) public view returns (uint) {
+        return self.store[keccak256(msg.sender, curr, attrName)];
     }
 
-    function setAttr(Data storage self, uint curr, bytes32 attrName, uint attrVal) {
-        self.store[sha3(msg.sender, curr, attrName)] = attrVal;
+    function setAttr(Data storage self, uint curr, bytes32 attrName, uint attrVal) public {
+        self.store[keccak256(msg.sender, curr, attrName)] = attrVal;
     }
 
-    function getNext(Data storage self, uint curr) returns (uint) {
+    function getNext(Data storage self, uint curr) public view returns (uint) {
         return getAttr(self, curr, "next");
     }
 
-    function getPrev(Data storage self, uint curr) returns (uint) {
+    function getPrev(Data storage self, uint curr) public view returns (uint) {
         return getAttr(self, curr, "prev");
     }
 
-    function insert(Data storage self, uint prev, uint id, uint[] attrVals) {
+    function insert(Data storage self, uint prev, uint id, uint[] attrVals) public {
         require(self.attrNames.length == attrVals.length);
 
         // if next is equal to id, thus id is being updated,
@@ -56,7 +56,8 @@ library ASCSDLL {
     }
     
     /// validate position of curr given prev and its sort attribute value
-    function validatePosition(Data storage self, uint prev, uint next, uint sortAttrVal) returns (bool valid) {
+    function validatePosition(Data storage self, uint prev, uint next, uint sortAttrVal) 
+    public view returns (bool valid) {
         // get prev and next sort attribute values to check for position
         uint prevSortAttrVal = getAttr(self, prev, self.attrNames[self.sortAttrIdx]);
         uint nextSortAttrVal = getAttr(self, next, self.attrNames[self.sortAttrIdx]);
@@ -69,7 +70,7 @@ library ASCSDLL {
     }
 
     /// removes curr nodes's links from list but preserves its data
-    function remove(Data storage self, uint curr) {
+    function remove(Data storage self, uint curr) public {
         uint prev = getPrev(self, curr);
         uint next = getNext(self, curr);
 
@@ -81,7 +82,7 @@ library ASCSDLL {
     }
 
     /// deletes nodes attribute data
-    function reset(Data storage self, uint curr) {
+    function reset(Data storage self, uint curr) public {
         remove(self, curr);
 
         // reset additional attributes of node
