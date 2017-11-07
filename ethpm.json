@@ -1,0 +1,13 @@
+{
+  "package_name": "ascsdll",
+  "version": "0.0.1",
+  "description": "Automatically sorted, circularly sexy doubly linked list",
+  "authors": [
+    "Yorke Rhodes <yorke.rhodesiv@consensys.net>, Cem Ozer <cem.ozer@consensys.net>"
+  ],
+  "keywords": [
+    "ethereum",
+    "data structures"
+  ],
+  "license": "MIT"
+}

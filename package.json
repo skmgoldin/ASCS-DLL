@@ -7,7 +7,8 @@
     "deploy-rinkeby": "truffle migrate --network rinkeby",
     "test": "truffle test",
     "fix": "eslint --fix",
-    "lint": "eslint"
+    "lint": "eslint",
+    "publish": "truffle publish"
   },
   "author": "yorke.rhodesiv@consensys.net>, cem.ozer@consensys.net",
   "license": "ISC",

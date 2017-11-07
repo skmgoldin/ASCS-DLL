@@ -11,11 +11,15 @@ if (fs.existsSync('secrets.json')) {
 
 module.exports = {
   networks: {
+    ropsten: {
+      provider: new HDWalletProvider(mnemonic, "https://ropsten.infura.io/"),
+      network_id: '*',
+    },
     rinkeby: {
       provider: new HDWalletProvider(mnemonic, 'https://rinkeby.infura.io'),
       network_id: '*',
       gas: 4500000,
-      gasPrice: 21000000000,
-    },
+      gasPrice: 25000000000,
+    }
   },
 };
